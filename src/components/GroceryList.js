@@ -15,12 +15,12 @@ const Demo = styled('div')(({ theme }) => ({
   width: 500,
 }));
 
-function GroceryList({groceryList}) {
+function GroceryList({groceryList, handleDelete}) {
   const dense = false;
   function generate(element) {
     return groceryList.map((value) =>
       React.cloneElement(element, {
-        key: value,
+        key: value.id,
         children: (
           <>
             <ListItemAvatar>
@@ -30,8 +30,13 @@ function GroceryList({groceryList}) {
             </ListItemAvatar>
             <ListItemText primary={value.title} />
 
+
+
           </>
         ),
+        secondaryAction: React.cloneElement(element.props.secondaryAction, {
+          onClick: () => handleDelete(value.id),
+        }),
 
       }),
     );
@@ -46,7 +51,7 @@ function GroceryList({groceryList}) {
                 <ListItem
                   secondaryAction={
                     <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
+                      <DeleteIcon/>
                     </IconButton>
                   }
                 >

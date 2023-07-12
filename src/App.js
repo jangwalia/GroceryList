@@ -22,11 +22,15 @@ function App() {
 
     setGroceries([...groceries, grocery]);
   }
+
+  const removeGrocery = (id) => {
+    setGroceries(groceries.filter((grocery) => grocery.id !== id));
+  }
   return (
     <div>
       <Header />
       <AddGrocery grocery={grocery} setGrocery={setGrocery} handleSubmit = {handleSumbit} />
-      <GroceryList groceryList={groceries} />
+      <GroceryList handleDelete = {removeGrocery} groceryList={groceries} />
     </div>
   );
 }
